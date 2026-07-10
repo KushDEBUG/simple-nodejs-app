@@ -39,14 +39,13 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Terrascan scan
-        uses: tenable/terrascan-action@v1
+      - name: Trivy scan
+        uses: aquasecurity/trivy-action@master
         with:
-          iac_type: "terraform"
-          iac_version: "v14"
-          policy_type: "aws"
-          iac_dir: "terraform/"
-          only_warn: false
+          image-ref: simple-nodejs-app:${{ github.sha }}
+          severity: CRITICAL,HIGH
+          exit-code: '1'
+          trivyignores: '.trivyignore'
 
   semgrep:
     runs-on: ubuntu-latest
