@@ -42,8 +42,21 @@ jobs:
       - name: Terrascan scan
         uses: tenable/terrascan-action@v1
         with:
-          iac_type: 'terraform'
-          iac_version: 'v14'
-          policy_type: 'aws'
-          iac_dir: 'terraform/'
+          iac_type: "terraform"
+          iac_version: "v14"
+          policy_type: "aws"
+          iac_dir: "terraform/"
           only_warn: false
+
+  semgrep:
+    runs-on: ubuntu-latest
+    container:
+      image: semgrep/semgrep
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Semgrep scan
+        run: semgrep ci --config auto
+        env:
+          SEMGREP_APP_TOKEN: ${{ secrets.SEMGREP_APP_TOKEN }}
