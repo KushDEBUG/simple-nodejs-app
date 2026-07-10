@@ -1,0 +1,18 @@
+version: v1.5.0
+ignore:
+  SNYK-JS-FORMDATA-10841150:
+    - '*':
+        reason: >
+          Transitive dependency via wiki-infobox-parser > request > form-data.
+          No fix available upstream. Application only performs a read-only GET
+          to Wikipedia's API; no multipart form data or file uploads occur,
+          so the boundary-randomness and CRLF injection issues in form-data
+          are not exploitable in this context.
+        expires: 2026-10-10T00:00:00.000Z
+  SNYK-JS-QS-14724253:
+    - '*':
+        reason: >
+          Transitive dependency via wiki-infobox-parser > request > qs.
+          No fix available upstream. No user-controlled query strings are
+          parsed through this dependency path in this application.
+        expires: 2026-10-10T00:00:00.000Z
