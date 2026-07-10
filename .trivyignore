@@ -1,0 +1,15 @@
+# form-data: transitive dependency via wiki-infobox-parser > request > form-data.
+# No fix available upstream without breaking the wiki-infobox-parser feature.
+# App only performs read-only GET requests; no multipart uploads occur,
+# so the boundary-randomness and CRLF injection vectors are not exploitable here.
+# Documented and accepted — see .snyk for matching Snyk-side justification.
+CVE-2025-7783
+CVE-2026-12143
+
+# undici: bundled inside npm's own internal tooling (not our app's dependency).
+# Path: usr/local/lib/node_modules/npm/node_modules/undici
+# This is npm CLI's internal HTTP client used during package installs at
+# build time, not code that runs in our application. No control over this
+# via package.json; will resolve automatically as the official Node.js
+# base image updates its bundled npm version.
+CVE-2026-12151
